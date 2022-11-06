@@ -11,6 +11,7 @@ import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 
+
 export default class menu extends React.Component {
   constructor(props) {
     super(props);
@@ -19,9 +20,11 @@ export default class menu extends React.Component {
   state = {};
   render() {
     return (
-      <Navbar fixed="top" bg="secondary" variant="dark" expand="lg" id="navbar">
+      
+      <Navbar fixed="top" bg="dark" variant="dark" expand="lg" id="navbar">
+       
         <Container>
-          <Navbar.Brand href="#home">MotorSport Performance Center</Navbar.Brand>
+          <Navbar.Brand href="#home">MotorSport Performance Center </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -31,7 +34,7 @@ export default class menu extends React.Component {
               <Nav.Link href="#link">Nosotros</Nav.Link>
               <Nav.Link href="#link">Contacto</Nav.Link>
             </Nav>
-            <DropdownButton id="dropdown-basic-button" title=" Usuario">
+            <DropdownButton id="dropdown-basic-button" title=" Usuario" variant="dark">
               <Dropdown.Header>
                 <Row>
                 <FontAwesomeIcon icon={faUserSecret} />
