@@ -8,6 +8,7 @@ import Menu from "./components/navbar/navbar";
 import AppRouter from "./components/router/router";
 import Particles from "./components/Particles";
 //import Inicio from "./components/index/index"
+import Footer from "./components/footer/footer";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         {/* <Inicio /> */}
         <AppRouter />
       </Container>
+      <Footer />
     </div>
   );
 }

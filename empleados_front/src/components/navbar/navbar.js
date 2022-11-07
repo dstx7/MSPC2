@@ -21,10 +21,10 @@ export default class menu extends React.Component {
   render() {
     return (
       
-      <Navbar fixed="top" bg="dark" variant="dark" expand="lg" id="navbar">
+      <Navbar fixed="top" bg="light" variant="light" expand="lg" id="navbar">
        
         <Container>
-          <Navbar.Brand href="#home">MotorSport Performance Center </Navbar.Brand>
+          <Navbar.Brand href="/index">MotorSport Performance Center </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
