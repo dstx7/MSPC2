@@ -1,7 +1,14 @@
 import React from "react";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
-
+import axios from "axios"; //permite enviar solicitudes del front hacia el back
+import app from "../../app.json"; //en caso de cambios en la direccion del back
 import "./login.css";
+import { isNull } from "util"; //esto sirve para comunicar el front y consultar si existe el token o si es nulo
+import Cookies from "universal-cookie"; //esto es para las sesiones temporales
+import { calcularExpirarSesion } from "../helper/helper";
+
+const {APIHOST} = app;
+const cookies = new Cookies();
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -12,8 +19,28 @@ export default class Login extends React.Component {
     };
   }
   iniciarSesion() {
-    alert("boton de iniciar sesion");
+    //alert("boton de iniciar sesion");
+    axios.post(`${APIHOST}/usuarios/login`,{
+      usuario: this.state.usuario,
+      pass: this.state.pass
+    })
+    .then((response) =>{
+      if (isNull(response.data.token)){
+        alert('Usuario y/o Contraseña Invalidos.')
+      }
+      else{
+        cookies.set('_s', response.data.token, {
+          path: '/',
+          expires: calcularExpirarSesion(),
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
+
+
   registrate() {
     alert("boton de registrarse");
   }

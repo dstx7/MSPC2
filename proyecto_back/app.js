@@ -5,13 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var database = require("./config/database");
 var auth = require("./auth/main_auth");
+var cors = require("cors"); //esto es necesario para dar respuesta a la solicitud del front
 
 var usuariosRouter = require("./routes/usuario.router");
 var empleadosRouter = require("./routes/empleados.router");
 var vehiculosRouter = require("./routes/vehiculos.router");
 var app = express();
-
-
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -19,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cors()) 
 
 //mongo connect
 database.mongoConnect();
