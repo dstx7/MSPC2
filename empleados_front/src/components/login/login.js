@@ -38,6 +38,7 @@ export default class Login extends React.Component {
           path: '/',
           expires: calcularExpirarSesion(),
         });
+        this.props.history.push(window.open('/empleados'));
       }
       this.setState({ loading: false });
     })
@@ -49,7 +50,8 @@ export default class Login extends React.Component {
 
 
   registrate() {
-    alert("boton de registrarse");
+    //alert("boton de registrarse");
+    this.props.history.push(window.open('/registrar'));
   }
 
   render() {

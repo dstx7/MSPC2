@@ -41,11 +41,11 @@ function Particle () {
                 },
                 modes: {
                     push: {
-                        quantity: 10,
+                        quantity: 2,
                     },
                     repulse: {
-                        distance: 100,
-                        duration: 2,
+                        distance: 5,
+                        duration: 0.5,
                     },
                 },
             },
