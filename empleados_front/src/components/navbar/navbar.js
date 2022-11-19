@@ -24,11 +24,11 @@ export default class menu extends React.Component {
       <Navbar fixed="top" bg="light" variant="light" expand="lg" id="navbar">
        
         <Container>
-          <Navbar.Brand href="/index">MotorSport Performance Center </Navbar.Brand>
+          <Navbar.Brand href="/">MotorSport Performance Center </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Inicio</Nav.Link>
+              {/* <Nav.Link href="/">Inicio</Nav.Link> */}
               <Nav.Link href="#link">Tienda</Nav.Link>
               <Nav.Link href="#home">Servicios</Nav.Link>
               <Nav.Link href="#link">Nosotros</Nav.Link>
@@ -44,8 +44,8 @@ export default class menu extends React.Component {
                 </Row>
               </Dropdown.Header>
               <Dropdown.Divider />
-
-              <Dropdown.Item href="#/action-1">Cerrar Sesión</Dropdown.Item>
+              <Dropdown.Item href="/login">Iniciar Sesión</Dropdown.Item>
+              {/* <Dropdown.Item href="#/action-1">Cerrar Sesión</Dropdown.Item> */}
               {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
               <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
             </DropdownButton>
