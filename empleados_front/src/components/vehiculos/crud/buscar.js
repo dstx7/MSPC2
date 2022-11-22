@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row } from 'react-bootstrap';
-import './vehiculos.css'
-import DataGrid from "../grid/grid";
+import '../vehiculos.css'
+import DataGrid from "../../grid/grid";
 
 const columns = [
     {
@@ -47,9 +47,9 @@ export default class Vehiculos extends React.Component {
     
     render() { 
         return ( 
-            <Container id="vehiculos-container">
+            <Container id="vehiculos-buscar-container">
                 <Row>
-                <h2> VEHÍCULOS </h2>
+                <h2> Consultar Vehículos en Servicio </h2>
         </Row>
         <Row>
         <DataGrid url="/vehiculos" columns={ columns }/>

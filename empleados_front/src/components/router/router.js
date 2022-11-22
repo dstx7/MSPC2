@@ -4,8 +4,8 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from "../login/login";
 import Inicio from "../index/index"
 import PrivateRoute from "../auth/privaterouter";
-import empleados from "../empleados/empleados.buscar";
-import Vehiculos from "../vehiculos/vehiculos";
+import empleados from "../empleados/inicioe";
+import Vehiculos from "../vehiculos/iniciov";
 
 
 export default function AppRoutes () {

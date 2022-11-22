@@ -1,5 +1,6 @@
 #vehiculos-container{
-    margin-top: 150px;
+    margin-top: 130px;
+    margin-bottom:6%;
 }
 
 .react-bs-table-sizePerPage-dropdown .dropdown-toggle{
@@ -14,4 +15,33 @@
 
 .sr-only {
     font-size: 0;
+}
+
+#vehiculos-buscar-container,
+#vehiculos-crear-container{
+    margin-top: 50px;
+}
+
+#vehiculos-crear-container .form-label{
+    float: left;
+    margin-top: 10px;
+}
+
+
+.react-bs-table-sizePerPage-dropdown .dropdown-toggle{
+    float: left;
+    margin-bottom: 20px;
+}
+
+.search-Label {
+    float: right;
+    padding-bottom: 10px;
+}
+
+.sr-only {
+    font-size: 0;
+}
+
+.nav.nav-pills .nav-link.active {
+    background-color: black
 }

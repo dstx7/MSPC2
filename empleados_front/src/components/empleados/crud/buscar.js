@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import { request } from "../helper/helper";
-import "./empleados.css";
-import DataGrid from "../grid/grid";
+import { request } from "../../helper/helper";
+import "../empleados.css";
+import DataGrid from "../../grid/grid";
 
 const columns = [
   {
@@ -56,7 +56,8 @@ export default class EmpleadosBuscar extends React.Component {
     return (
       <Container id="empleados-buscar-container">
         <Row>
-          <h2>EMPLEADOS</h2>
+          <h2>Consultar Empleado</h2>
+          <hr/>
         </Row>
         <Row>
         <DataGrid url="/empleados" columns={ columns }/>
