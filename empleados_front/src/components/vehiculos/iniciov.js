@@ -3,6 +3,7 @@ import { Container, Nav, Row } from "react-bootstrap";
 import "./vehiculos.css";
 import VehiculosBuscar from "./crud/buscar";
 import VehiculosCrear from "./crud/crear";
+import VehiculosEditar from "./crud/editar";
 
 
 export default class Vehiculos extends React.Component {
@@ -11,6 +12,11 @@ export default class Vehiculos extends React.Component {
     this.state = {
         currentTab: 'buscar',
     };
+    this.changeTab = this.changeTab.bind(this);
+  }
+
+  changeTab(tab){
+    this.setState({ currentTab: tab});
   }
 
   render() {
@@ -34,7 +40,7 @@ export default class Vehiculos extends React.Component {
             {this.state.currentTab === 'buscar'?
             (<VehiculosBuscar />) :this.state.currentTab === 'crear'? 
             (<VehiculosCrear changeTab={
-              (tab) => this.changeTab(tab)} />): null}
+              (tab) => this.changeTab(tab)} />): (<VehiculosEditar />)}
         </Row>
       </Container>
     );

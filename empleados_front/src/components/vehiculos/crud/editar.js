@@ -1,18 +1,14 @@
 import React from "react";
-import { Container, Row, Form, Button } from "react-bootstrap";
+import { Container, Row, Button, Form} from "react-bootstrap";
+import "../vehiculos.css";
 import { request } from "../../helper/helper";
 import Loading from "../../loading/loading";
 import MessagePrompts from "../../prompts/message";
 
-export default class VehiculosCrear extends React.Component {
+export default class VehiculosEditar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rediret: false,
-      message:{
-        text: '',
-        show: false,
-      },
       loading: false,
       vehiculo: {
         marca: "",
@@ -24,7 +20,6 @@ export default class VehiculosCrear extends React.Component {
         servicio: "",
       },
     };
-    this.onExitedMessage = this.onExitedMessage.bind(this);
   }
 
 setValue(iniciov,value){
@@ -37,43 +32,26 @@ setValue(iniciov,value){
 }
 
 guardarVehiculos(){
-
-  this.setState({ loading: true});
+  
   request
   .post('/vehiculos',this.state.vehiculo)
   .then((response) => {
-    if (response.data.exito){
-      this.setState({
-        rediret: response.data.exito,
-       message: {
-        text: response.data.msg,
-        show: true,
-      },
-    });
-
-    }
     this.setState({ loading: false});
+    if(response.data.exito){
+      window.location.reload();
+    }
+    this.setState({ loading: true});
     console.log(response.data);
   })
   .catch((err) => {
-    console.error(err);
     this.setState({ loading: true});
+    console.error(err);
   });
-}
-onExitedMessage () {
-  if (this.state.rediret) this.props.changeTab( 'buscar' );
 }
 
   render() {
     return (
       <Container id="vehiculos-crear-container">
-         <MessagePrompts  
-          text={this.state.message.text}
-          show={this.state.message.show}
-          duration={2500}
-          onExited={this.onExitedMessage}
-          />
-          
         <Loading show = {this.state.loading} />
         <Row>
           <h2> Registrar Vehículo </h2>
