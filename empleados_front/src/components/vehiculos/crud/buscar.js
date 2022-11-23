@@ -50,9 +50,10 @@ export default class Vehiculos extends React.Component {
             <Container id="vehiculos-buscar-container">
                 <Row>
                 <h2> Consultar Vehículos en Servicio </h2>
+                <hr />
         </Row>
         <Row>
-        <DataGrid url="/vehiculos" columns={ columns }/>
+        <DataGrid url="/vehiculos" columns={ columns } showEditButton={true} />
         </Row>
                 
             </Container>

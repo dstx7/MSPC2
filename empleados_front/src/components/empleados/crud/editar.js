@@ -4,7 +4,7 @@ import { request } from "../../helper/helper";
 import Loading from "../../loading/loading";
 import MessagePrompts from "../../prompts/message";
 
-export default class EmpleadosCrear extends React.Component {
+export default class EmpleadosEditar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
