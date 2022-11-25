@@ -3,16 +3,24 @@ import { Container, Row, Form, Button } from "react-bootstrap";
 import { request } from "../../helper/helper";
 import Loading from "../../loading/loading";
 import MessagePrompts from "../../prompts/message";
+import ConfirmationPrompts from "../../prompts/confirmation";
 
 export default class EmpleadosEditar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      rediret:false,
+      idEmpleado: this.props.getIdEmpleado(),
+      rediret: false,
 
       message: {
         //muestra el mensaje
         text: "",
+        show: false,
+      },
+
+      confirmation: {
+        title: 'Modificar empleado',
+        text: '¿Desea modificar el empleado?',
         show: false,
       },
 
@@ -27,7 +35,29 @@ export default class EmpleadosEditar extends React.Component {
       },
     };
     this.onExitedMessage = this.onExitedMessage.bind(this);
-  };
+    this.onCancel = this.onCancel.bind(this);
+    this.onConfirm = this.onConfirm.bind(this);
+  }
+
+  componentDidMount() {
+    this.getEmpleado();
+  }
+
+  getEmpleado() {
+    this.setState({ loading: true });
+    request
+      .get(`/empleados/${this.state.idEmpleado}`)
+      .then((response) => {
+        this.setState({
+          empleado: response.data,
+          loading: false,
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
+  }
 
   setValue(inicioe, value) {
     this.setState({
@@ -40,10 +70,11 @@ export default class EmpleadosEditar extends React.Component {
 
   guardarEmpleados() {
     request
-      .post("/empleados", this.state.empleado)
+      .put(`/empleados/${this.state.idEmpleado}`, this.state.empleado)
       .then((response) => {
         this.setState({ loading: true });
         if (response.data.exito) {
+          this.props.changeTab("buscar");
           this.setState({
             rediret: response.data.exito,
             message: {
@@ -61,8 +92,22 @@ export default class EmpleadosEditar extends React.Component {
       });
   }
 
-  onExitedMessage () {
-    if (this.state.rediret) this.props.changeTab( 'buscar' );
+  onExitedMessage() {
+    if (this.state.rediret) this.props.changeTab("buscar");
+  }
+
+  onCancel(){
+    this.setState({
+      confirmation: {...this.state.confirmation, show:false, }, 
+    })
+  }
+
+  onConfirm(){
+    this.setState({
+      confirmation: {...this.state.confirmation, show:false, }, 
+    },
+   this.guardarEmpleados(), 
+    );
   }
 
   render() {
@@ -75,16 +120,25 @@ export default class EmpleadosEditar extends React.Component {
           onExited={this.onExitedMessage}
         />
 
+        <ConfirmationPrompts
+          show={this.state.confirmation.show}
+          title={this.state.confirmation.title}
+          text={this.state.confirmation.text}
+          onCancel={this.onCancel}
+          onConfirm={this.onConfirm}
+        />
+
         <Loading show={this.state.loading} />
 
         <Row>
-          <h2> Registrar Empleado </h2>
+          <h2> Editar Empleado </h2>
         </Row>
         <Row>
           <Form>
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
+                value={this.state.empleado.nombre}
                 onChange={(e) => this.setValue("nombre", e.target.value)}
               />
             </Form.Group>
@@ -92,6 +146,7 @@ export default class EmpleadosEditar extends React.Component {
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Apellido Paterno</Form.Label>
               <Form.Control
+                value={this.state.empleado.apellido_p}
                 onChange={(e) => this.setValue("apellido_p", e.target.value)}
               />
             </Form.Group>
@@ -99,6 +154,7 @@ export default class EmpleadosEditar extends React.Component {
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Apellido Materno</Form.Label>
               <Form.Control
+                value={this.state.empleado.apellido_m}
                 onChange={(e) => this.setValue("apellido_m", e.target.value)}
               />
             </Form.Group>
@@ -106,6 +162,7 @@ export default class EmpleadosEditar extends React.Component {
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Telefono</Form.Label>
               <Form.Control
+                value={this.state.empleado.telefono}
                 onChange={(e) => this.setValue("telefono", e.target.value)}
               />
             </Form.Group>
@@ -113,6 +170,7 @@ export default class EmpleadosEditar extends React.Component {
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
+                value={this.state.empleado.mail}
                 type="email"
                 onChange={(e) => this.setValue("mail", e.target.value)}
               />
@@ -121,15 +179,21 @@ export default class EmpleadosEditar extends React.Component {
             <Form.Group className="mb-3" controlId="formBasic">
               <Form.Label>Direccion</Form.Label>
               <Form.Control
+                value={this.state.empleado.direccion}
                 onChange={(e) => this.setValue("direccion", e.target.value)}
               />
             </Form.Group>
 
             <Button
               variant="light"
-              onClick={() => console.log(this.guardarEmpleados())}
+              // onClick={() => console.log(this.guardarEmpleados())}
+              onClick= {() => 
+              this.setState({
+                confirmation: {...this.state.confirmation, show:true},
+              })
+            }
             >
-              Guardar Empleado
+              Guardar Editar Empleado
             </Button>
           </Form>
         </Row>

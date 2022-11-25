@@ -3,6 +3,7 @@ import { Container, Row } from "react-bootstrap";
 import { request } from "../../helper/helper";
 import "../empleados.css";
 import DataGrid from "../../grid/grid";
+import Loading from "../../loading/loading";
 
 const columns = [
   {
@@ -40,12 +41,12 @@ export default class EmpleadosBuscar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading : false,
+      idEmpleado: null,
 
     };
     this.onClickEditButton = this.onClickEditButton.bind(this);
   }
-
-
 
   componentDidMount() {
     request
@@ -58,14 +59,15 @@ export default class EmpleadosBuscar extends React.Component {
       });
   }
 
-  onClickEditButton(){
+  onClickEditButton(row){
+    this.props.setIdEmpleado(row._id);
     this.props.changeTab('editar');
   }
 
   render() {
-  
     return (
       <Container id="empleados-buscar-container">
+        <Loading show={this.state.loading} />
         <Row>
           <h2>Consultar Empleado</h2>
           <hr/>
