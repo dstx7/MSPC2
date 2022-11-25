@@ -24,7 +24,7 @@ export default class Loading extends React.Component {
             <>
                 { this.state.show ? ( 
                 <div id="loading-backdrop">
-                    <Spinner animation="grow" />;
+                    <Spinner animation="grow" />
                 </div>
                 ) : null }
                 </>

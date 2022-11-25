@@ -3,6 +3,7 @@ import { Container, Row } from "react-bootstrap";
 import "../vehiculos.css";
 import DataGrid from "../../grid/grid";
 import { request } from "../../helper/helper";
+import Loading from "../../loading/loading";
 
 const columns = [
   {
@@ -43,7 +44,10 @@ const columns = [
 export default class VehiculosBuscar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      loading : false,
+      idVehiculo: null,
+    };
     this.onClickEditButton = this.onClickEditButton.bind(this);
   }
 
@@ -58,13 +62,15 @@ export default class VehiculosBuscar extends React.Component {
       });
   }
 
-  onClickEditButton() {
-    this.props.changeTab("editar");
+  onClickEditButton(row){
+    this.props.setIdVehiculo(row._id);
+    this.props.changeTab('editar');
   }
 
   render() {
     return (
       <Container id="vehiculos-buscar-container">
+         <Loading show={this.state.loading} />
         <Row>
           <h2> Consultar Vehículos en Servicio </h2>
           <hr />
