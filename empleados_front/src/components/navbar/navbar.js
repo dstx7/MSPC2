@@ -10,14 +10,23 @@ import {
 import "./navbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 
 export default class menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
+    
   }
   state = {};
+  Logout() {
+    cookies.remove("_s");
+    window.location.reload();
+}
+
   render() {
     return (
       
@@ -46,7 +55,8 @@ export default class menu extends React.Component {
               <Dropdown.Divider />
               <Dropdown.Item href="/login">Iniciar Sesión</Dropdown.Item>
               <Dropdown.Item href="/empleados">Empleados</Dropdown.Item>
-              <Dropdown.Item href="/vehiculos">Vehículos</Dropdown.Item>  
+              <Dropdown.Item href="/vehiculos">Vehículos</Dropdown.Item>
+              <Dropdown.Item onClick={() => this.Logout()}>Cerrar Sesión</Dropdown.Item>   
               {/* <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
               <Dropdown.Item href="#/action-3">Something else</Dropdown.Item> */}
             </DropdownButton>
